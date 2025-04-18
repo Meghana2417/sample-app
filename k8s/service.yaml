@@ -3,9 +3,9 @@ kind: Service
 metadata:
   name: ci-cd-service
 spec:
-  type: sample-app
+  type: LoadBalancer 
   selector:
-    app: ci-cd-demo
+    app: sample-app
   ports:
     - protocol: TCP
       port: 80
