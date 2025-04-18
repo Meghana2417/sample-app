@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "your-dockerhub-username/ci-cd-demo"
+        DOCKER_IMAGE = "meghana1724/sample-app"
     }
 
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/your-username/ci-cd-demo.git'
+                git 'https://github.com/Meghana2417/sample-app.git'
             }
         }
 
