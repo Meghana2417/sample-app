@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: ci-cd-service
 spec:
-  type: LoadBalancer
+  type: sample-app
   selector:
     app: ci-cd-demo
   ports:
