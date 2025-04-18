@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'docker-enabled-agent'
+    }
 
     environment {
         DOCKER_IMAGE = "meghana1724/sample-app"
