@@ -22,8 +22,10 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                withDockerRegistry([credentialsId: 'docker-hub-creds', url: '']) {
-                    dockerImage.push("latest")
+                script {
+                    withDockerRegistry([credentialsId: 'docker-hub-creds', url: '']) {
+                        dockerImage.push("latest")
+                    }
                 }
             }
         }
