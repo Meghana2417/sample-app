@@ -1,0 +1,38 @@
+pipeline:
+  agent: any
+
+  environment:
+    DOCKER_IMAGE: "meghana1724/sample-app"
+
+  stages:
+    - name: Clone Repo
+      steps:
+        - checkout:
+            scm: git
+            url: "https://github.com/Meghana2417/sample-app.git"
+            branch: "main"
+
+    - name: Build Docker Image
+      steps:
+        - script:
+            dockerImage = docker.build(env.DOCKER_IMAGE)
+
+    - name: Push to Docker Hub
+      steps:
+        - script:
+            withDockerRegistry:
+              credentialsId: 'meghana1724'
+              url: ''
+            dockerImage.push("latest")
+
+    - name: Deploy to K8s
+      steps:
+        - sh: 'kubectl apply -f k8s/deployment.yaml'
+        - sh: 'kubectl apply -f k8s/service.yaml'
+
+  post:
+    failure:
+      - mail:
+          to: "meghana.s.18025@gmail.com"
+          subject: "CI/CD Pipeline Failed"
+          body: "Please check Jenkins logs for further details."
